@@ -1,26 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Author } from './entities/author.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class AuthorService {
-  create(createAuthorDto: CreateAuthorDto) {
-    return 'This action adds a new author';
+  constructor(
+    @InjectModel(Author.name) private authorModel: Model<Author>,
+  ) { }
+
+  async create(createAuthorDto: CreateAuthorDto) {
+    await this.authorModel.create(createAuthorDto);
+
+    return createAuthorDto;
   }
 
-  findAll() {
-    return `This action returns all author`;
+  async findAll() {
+    return await this.authorModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} author`;
+  async findOne(id: number) {
+    return await this.authorModel.findOne({ _id: id });
   }
 
-  update(id: number, updateAuthorDto: UpdateAuthorDto) {
-    return `This action updates a #${id} author`;
+  async update(id: number, updateAuthorDto: UpdateAuthorDto) {
+    await this.authorModel.updateOne({ _id: id, }, updateAuthorDto);
+
+    return updateAuthorDto;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} author`;
+  async remove(id: number) {
+    await this.authorModel.deleteOne({ _id: id });
+
+    return { message: 'Author deleted successfully' }
   }
 }
