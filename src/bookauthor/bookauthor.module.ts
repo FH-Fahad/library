@@ -7,6 +7,6 @@ import { BookAuthorSchema } from './entities/book-author.entity';
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'BookAuthor', schema: BookAuthorSchema }])],
   controllers: [BookauthorController],
-  providers: [BookauthorService]
+  providers: [BookauthorService],
 })
 export class BookauthorModule { }

@@ -1,10 +1,9 @@
 import { IsNotEmpty } from "class-validator";
-import { Types } from "mongoose";
 
 export class BookauthorDto {
     @IsNotEmpty()
-    readonly bookId: Types.ObjectId;
+    readonly bookId: string;
 
     @IsNotEmpty()
-    readonly authorId: Types.ObjectId;
+    readonly authorId: string;
 }

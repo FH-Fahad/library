@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Types } from "mongoose";
 
 @Schema({ timestamps: true })
 export class Book {
@@ -10,6 +11,9 @@ export class Book {
 
     @Prop({ required: true })
     price: number;
+
+    @Prop({ required: true })
+    authorId: Types.ObjectId;
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);

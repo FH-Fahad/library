@@ -11,4 +11,7 @@ export class CreateBookDto {
     @IsString()
     @IsNumber()
     price: number;
+
+    @IsString()
+    authorId: string;
 }

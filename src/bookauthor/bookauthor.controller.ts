@@ -1,4 +1,14 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { BookauthorService } from './bookauthor.service';
 
 @Controller('bookauthor')
-export class BookauthorController {}
+export class BookauthorController {
+    constructor(
+        private readonly bookauthorService: BookauthorService
+    ) { }
+
+    @Get()
+    findAll() {
+        return this.bookauthorService.findAll();
+    }
+}

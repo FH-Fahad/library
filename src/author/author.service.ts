@@ -12,9 +12,9 @@ export class AuthorService {
   ) { }
 
   async create(createAuthorDto: CreateAuthorDto) {
-    await this.authorModel.create(createAuthorDto);
+    const author = await this.authorModel.create(createAuthorDto);
 
-    return createAuthorDto;
+    return author;
   }
 
   async findAll() {
